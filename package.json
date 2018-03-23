@@ -1,0 +1,12 @@
+{
+  "name": "empyr-js",
+  "version": "0.0.2",
+  "description": "Includes Empyr tracking (empyr.js) and the Hosted Fields (mogl.js)",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jarrod Cuzens"
+}

@@ -1,7 +1,7 @@
 {
   "name": "empyr_web",
   "version": "0.0.6",
-  "description": "Includes Empyr tracking (empyr.js) and the Hosted Fields (mogl.js)",
+  "description": "Includes Empyr tracking and Hosted Fields scripts",
   "directories": {
     "test": "test"
   },

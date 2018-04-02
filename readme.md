@@ -1,5 +1,20 @@
 [ ![Codeship Status for mzipagang/empyr_web](https://app.codeship.com/projects/c70ffbe0-0d70-0136-1ce4-3a8e8d4354bb/status?branch=master)](https://app.codeship.com/projects/282068)
 
+
+# Impression Tracking
+
+<b>Introduction</b><br>
+In order to provide better visibility to merchants on consumer views and tracking through the conversion funnel Empyr has implemented a tracking mechanism to record the impressions that consumers make when viewing offers. This guide is intended for partners in the Empyr network to be able to leverage the impression tracking system.
+
+<br>
+<b>Overview</b><br>
+Much like traditional ad networks will leverage tracking pixels embedded in creative delivered through ad networks to deliver impression data Empyr has developed tracking technology to record impressions across the Empyr network.
+
+Unlike traditional ad networks Empyr merchant content is typically consumed through APIs or through feeds delivered to partners by SFTP. Because of this it is necessary to request the cooperation of our partners in the embedding/display of the Empyr tracking technology.
+
+Additionally, the goal of the tracking is to link the consumer profile (with associated card) with the impression data which can then be used to attribute purchases made with that card to the viewing of the merchant offer.
+
+
 # Hosted Fields (BETA)
 
 <b>Introduction</b>
@@ -70,9 +85,9 @@ There are two primary ways in which you can customize the look and feel of the r
 
 <i>
 "-moz-osx-font-smoothing", "-moz-transition", "-webkit-font-smoothing", "-webkit-transition", "color", "font", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-variant-alternates", "font-variant-caps", "font-variant-east-asian", "font-variant-ligatures", "font-variant-numeric", "font-weight", "line-height", "opacity", "outline", "text-shadow", "transition"
-</i><br>
+</i>
 
-
+<br>
 Below are the options that are available to the Mogl.setup() call:
 
 ``` javascript

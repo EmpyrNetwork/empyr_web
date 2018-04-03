@@ -3,21 +3,110 @@
 
 # Impression Tracking
 
-<b>Introduction</b><br>
+## Introduction
 In order to provide better visibility to merchants on consumer views and tracking through the conversion funnel Empyr has implemented a tracking mechanism to record the impressions that consumers make when viewing offers. This guide is intended for partners in the Empyr network to be able to leverage the impression tracking system.
 
-<br>
-<b>Overview</b><br>
+## Overview
 Much like traditional ad networks will leverage tracking pixels embedded in creative delivered through ad networks to deliver impression data Empyr has developed tracking technology to record impressions across the Empyr network.
 
 Unlike traditional ad networks Empyr merchant content is typically consumed through APIs or through feeds delivered to partners by SFTP. Because of this it is necessary to request the cooperation of our partners in the embedding/display of the Empyr tracking technology.
 
 Additionally, the goal of the tracking is to link the consumer profile (with associated card) with the impression data which can then be used to attribute purchases made with that card to the viewing of the merchant offer.
 
+A high level description would be:
 
-# Hosted Fields (BETA)
+1. Partner page loads and displays offer
+2. Partner page triggers impression pixel which includes:
 
-<b>Introduction</b>
+   a. Partner id
+   
+   b. Empyr user id OR partner Empyr user token
+   
+   c. List of offer ids displayed on the page
+   
+3. Pixel/impression is loaded from Empyr servers and recorded
+4. Empyr warehousing systems process the impression data for reporting to merchants
+
+## The Pixel
+The pixel that Empyr uses for tracking takes the following form:
+
+https://t.mogl.com/t/t.png
+
+It is capable of being supplied with the following parameters
+
+Parameter| Required | Description
+---------| -------- | -----------
+pid | true | Partner id. This is the client key (NOT THE SECRET). Used to correlate the user data with the partner.
+oi | true | Offer Ids. This is a list of offer ids (business ids). For example the value could be “1014” or “1014,1018,1020” etc.
+m | false | The empyr id of the user performing the view. This would be the value returned as the id for the user from the signupWithCard/signup APIs. This is used to tie the user to the impression for conversion metrics.
+u | false | The partner’s usertoken that was supplied with the signupWithCard/signup APIs. This can be used instead of the “m” param for convenience.
+
+## Tracking.js
+Tracking.js is a javascript library that allows a partner to quickly and seamlessly add impression tracking to their site. Adding the following code to your sites template would be the easiest way to add tracking:
+
+```html
+<!-- Start Empyr -->
+<script>
+window.empyr=window.empyr||function(){(empyr.q=empyr.q||[]).push(arguments)};empyr.l=+new Date;
+	empyr('setup', 'CLIENT_ID', {m: EMPYR_UID, watch: true});
+</script>
+<script async src='//d10ukqbetc2okm.cloudfront.net/mstatic/partner/empyr.js'></script>
+<!-- End Empyr -->
+```
+
+The above code will asynchronously load the Empyr tracking javascript and initialize it. Please note the following parameters:
+
+1. CLIENT_ID -- This is your API key (NOT THE SECRET) which is used to identify the user as belonging to your application.
+
+2. m: EMPYR_UID -- The EMPYR_UID would represent the UID of the user from the Empyr platform that is returned when you register a user in Empyr (e.g. through signupWithCard). Alternatively, you can provide “u: USER_TOKEN” where USER_TOKEN would be the user token that you provided to Empyr when registering the user. Please note that if a user IS NOT CURRENTLY LOGGED IN OR NOT SIGNED UP THIS CAN BE OMITTED.
+
+3. watch:true -- This parameter is used to tell the Empyr.js to “watch” the document DOM for changes and will be discussed further below.
+
+## Tracking
+Once the tracking code has been loaded and setup the next step is to actually *TRACK* the offers being displayed. There are TWO mechanisms to do this:
+
+Adding the “eid” attribute to a DOM element that you are displaying an offer in.
+Calling empyr( ‘track’, ‘OFFER_ID’ )
+
+<br>
+<b>The Attribute Method</b>
+Using the attribute approach is very straightforward. For any DOM element in the page where you are displaying an offer simply add the ‘eid=OFFER_ID’ where “OFFER_ID” represents the id of the business/offer being displayed.
+<br>
+<br>
+
+``` html
+<div class=”offer” eid=”1014”>
+    <div class=”name”>Taco Express</div>
+    <div class=”discount”>Discount: 10%</div>
+</div>
+<div class=”offer” eid=”1015”>
+    <div class=”name”>Pizza Nova</div>
+    <div class=”discount”>Discount: 10%</div>
+</div>
+```
+
+When the page loads the script will scan the document for the eid attribute and create a single pixel call that contains all the offer ids concatenated together (saving multiple pixel calls).
+
+Additionally, if “watch:true” is supplied at the time of setup then the system will automatically monitor the DOM for changes (e.g. AJAX loads) and will make the appropriate pixel fires for the dynamically loaded content. If content WILL NOT be loaded by ajax then not supplying “watch:true” will have a small performance benefit as the script will not register a MutableObserver to process the DOM changes.
+
+<br>
+<b>Calling the “track” method</b>
+If you don’t wish to use the attribute approach outlined earlier then it is always possible to call the tracking methods directly as in the examples below:
+
+``` javascript
+empyr( “track”, “1014” )
+empyr( “track”, [“1014”,”1018”] )
+```
+
+The advantage of the second call over the first is that there will be a single pixel fire to track impressions for 1014 and 1018 instead of if you called the track call individually on 1014 and 1018.
+
+<br>
+<br>
+
+#  Hosted Fields (BETA)
+
+
+## Introduction
 
 For partners who are not currently PCI compliant and would like to be subject to the minimum level of compliance (SAQ A) MOGL Hosted Fields is a very flexible card registration solution. At a high level the integration steps are:
 
@@ -45,9 +134,7 @@ Upon user completion of the credit card details and submission of the form, the 
 2. Submit the card to Mogl.com with the associated user token
 3. When the response is received any corresponding error/success will be delivered back to the parent page. This can be accomplished through the use of success/error callbacks. If those callbacks are not specified then the script will submit the parent form as well as include the registration details of the card or, in the event of error, do a standard javascript alert to the browser.
 
-<br>
-<b>UserToken</b>
-
+## UserToken
 
 The userToken represents the user in the Mogl system. At a very high level the user is a container of registered card details. The email from the userToken will further be used when your application makes API requests to Mogl.com to retrieve user details or when Mogl.com sends transaction information back to your application.
 
@@ -64,9 +151,7 @@ Please note the following field descriptions:
 2. expireTime_t -- The length of time the specified token is valid. Since this token is used to add cards to accounts it is recommended that this be no more than 1 hour in the future.
 3. key -- Your client secret.
 
-<br>
-<b>RegisterDetails</b>
-
+## RegisterDetails
 
 Successful registration of the card will yield a REGISTER_DETAILS string which contains the information necessary for associating the user with the card identifier. The format of this registration string is as follows:
 
@@ -76,8 +161,7 @@ email + ':' + cardId + ':' + nonce + ':' + BASE64( hmacSha512( key, email + ':' 
 
 The email/cardId relationship should be saved locally in your system so that you may properly link the card back to the user when Mogl sends your application transactions.
 
-<br>
-<b>Customization</b>
+## Customization
 
 There are two primary ways in which you can customize the look and feel of the registration form:
 * Apply styles to the outside container (e.g. border colors etc.). You have nearly unlimited ability to customize the look of this since it is your parent page which controls this.
@@ -109,8 +193,7 @@ Below are the options that are available to the Mogl.setup() call:
 ```
 
 
-<br>
-<b>Example</b>
+## Example
 
 ``` html
 <html>

@@ -12,9 +12,9 @@ var optimization = {
 
 module.exports = [
 	{
-	  entry: './tracking.js',
+	  entry: './tracker.js',
 	  output: {
-	    filename: 'tracking.min.js',
+	    filename: 'tracker.min.js',
 	    path: path.resolve(__dirname, 'dist')
 	  },
 	  optimization: optimization

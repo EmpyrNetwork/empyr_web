@@ -1,6 +1,6 @@
 'use strict';
 
-var EmpyrQueue = (function(wp){
+var Tracker = (function(wp){
 	var w = wp;
 	var e = w.empyr.q;
 	
@@ -88,7 +88,7 @@ var EmpyrQueue = (function(wp){
 		}
 	}
 	
-	EmpyrQueue = {
+	Tracker = {
 		push: _e.push
 	};
 	
@@ -98,8 +98,8 @@ var EmpyrQueue = (function(wp){
 		w.empyr.apply( w.empyr, e[i] );
 	}
 
-	return EmpyrQueue;
+	return Tracker;
 	
 })(window);
 
-module.exports = EmpyrQueue;
+module.exports = Tracker;

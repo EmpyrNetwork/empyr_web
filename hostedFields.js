@@ -1,11 +1,11 @@
 'use strict';
 
-var Mogl = (function(){
+var HostedFields = (function(){
 	var options = {
 			id: undefined,					// The id of the form.
 			onRegistered: undefined,		// The method to call when we have successfully registered.
 			onError: undefined,				// The method to call in the event of an error,
-			url: 'https://www.mogl.com',	// The url that will be used to construct the hosted fields.
+			url: 'https://www.HostedFields.com',	// The url that will be used to construct the hosted fields.
 			fields: {
 				userDetails: undefined,				// The user token assigned to the user userToken + ':' + expirationTime + ':' + BASE64( sha512( userToken + ':' + expireTime_t + ':' + key ) )
 				styles: {							// Style the fields
@@ -541,13 +541,13 @@ SOFTWARE.
 		
 	// END FRAMEBUS
 
-// Continue with mogl wrapper.
-	Mogl = 
+// Continue with HostedFields wrapper.
+	HostedFields = 
 		{
 			setup: setup
 		};
 
-	return Mogl;
+	return HostedFields;
 })();
 
-module.exports = Mogl;
+module.exports = HostedFields;

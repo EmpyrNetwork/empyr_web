@@ -37,11 +37,10 @@ It is capable of being supplied with the following parameters
 Parameter| Required | Description
 ---------| -------- | -----------
 pid | true | Partner id. This is the client key (NOT THE SECRET). Used to correlate the user data with the partner.
-oi | true | Offer Ids. This is a list of offer ids. For example the value could be “5554” or “5554,5556,5558” etc.
-m | false | The empyr id of the user performing the view. This would be the value returned as the id for the user from the signupWithCard/signup APIs. This is used to tie the user to the impression for conversion metrics.
-u | false | The partner’s usertoken that was supplied with the signupWithCard/signup APIs. This can be used instead of the “m” param for convenience.
+vw (WEB_SEARCH_VIEW or WEB_DETAIL_VIEW) | true | This is a list of offer ids and the context they appear in. For example the value could be “WEB_DETAIL_VIEW=5554” or “WEB_SEARCH_VIEW=5554,5556,5558”, etc.
+id | false | The empyr id of the user performing the view. This would be the value returned as the id for the user from the signupWithCard/signup APIs. This is used to tie the user to the impression for conversion metrics. Alternatively, this can also be a partner’s usertoken that was supplied with the signupWithCard/signup APIs. This can be used instead of the empyr id param for convenience.
 
-## Tracking.js
+## Tracker.js
 Tracking.js is a javascript library that allows a partner to quickly and seamlessly add impression tracking to their site. Adding the following code to your sites template would be the easiest way to add tracking:
 
 ```html
@@ -49,9 +48,21 @@ Tracking.js is a javascript library that allows a partner to quickly and seamles
 <script>
 	Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
 </script>
-<script async src='//d10ukqbetc2okm.cloudfront.net/mstatic/partner/empyr.js'></script>
+<script async src='//d10ukqbetc2okm.cloudfront.net/mstatic/partner/tracker.js'></script>
 <!-- End Empyr -->
 ```
+
+<br>
+Alternatively, you can use npm:
+<br>
+npm install empyr_web
+<br>
+then
+<br>
+``` javascript
+Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
+```
+<br>
 
 The above code will asynchronously load the Empyr tracking javascript and initialize it. Please note the following parameters:
 
@@ -71,7 +82,7 @@ Using the attribute approach is very straightforward. For any DOM element in the
 <br>
 
 ``` html
-<div class=”view” vw=”WEB_VIEW_SEARCH”>
+<div class=”view” vw=”WEB_SEARCH_VIEW”>
     <div class=”offer” eid=”5554”>
         <div class=”name”>Taco Express</div>
         <div class=”discount”>Discount: 10%</div>
@@ -83,7 +94,7 @@ Using the attribute approach is very straightforward. For any DOM element in the
 </div>
 ```
 
-When the page loads, the script will scan the document for the eid attribute and create a single pixel call that contains all the offer ids concatenated together (saving multiple pixel calls). The script will also try to detect the context that the offers are viewed in from the vw attribute. WEB_VIEW_SEARCH indicates that the offers were viewed as search results and WEB_VIEW_DETAIL indicates an offer being viewed in detail.
+When the page loads, the script will scan the document for the eid attribute and create a single pixel call that contains all the offer ids concatenated together (saving multiple pixel calls). The script will also try to detect the context that the offers are viewed in from the vw attribute. WEB_SEARCH_VIEW indicates that the offers were viewed as search results and WEB_DETAIL_VIEW indicates an offer being viewed in detail.
 
 Additionally, if “watch:true” is supplied at the time of setup then the system will automatically monitor the DOM for changes (e.g. AJAX loads) and will make the appropriate pixel fires for the dynamically loaded content. If content WILL NOT be loaded by ajax then not supplying “watch:true” will have a small performance benefit as the script will not register a MutableObserver to process the DOM changes.
 
@@ -94,7 +105,7 @@ If you don’t wish to use the attribute approach outlined earlier then it is al
 ``` javascript
 // Explicitly call the track function with the id of the offer, and the view context the offer appears in
 Tracker.track(“5554”, “WEB_DETAIL_VIEW” )
-empyr.track([“5554”,“5556”,”5558”], “WEB_SEARCH_VIEW” )
+Tracker.track([“5554”,“5556”,”5558”], “WEB_SEARCH_VIEW” )
 ```
 
 The advantage of the second call over the first is that there will be a single pixel fire to track impressions for 5554, 5556 and 5558, instead of three pixel fires.

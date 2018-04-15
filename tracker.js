@@ -15,7 +15,7 @@ var Tracker = (function(){
 			_e.m = arguments[1]["m"] ? 'm=' + arguments[1]["m"] : undefined;
 			_e.u = arguments[1]["u"] ? 'u=' + arguments[1]["u"] : undefined;
 			_e.h = arguments[1]["h"] ? 'h=' + arguments[1]["h"] : undefined;
-			
+
 			_e.id = _e.m || _e.u || _e.h || "";
 			//console.log( _e.id );
 			
@@ -75,7 +75,7 @@ var Tracker = (function(){
 		track : function( oi ){
 			if( oi.length ){
 				//console.log( JSON.stringify( oi ) );
-				(new Image()).src = _e.pixel + "?pid=" + _e.p + "&" + _e.view + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + "&" + _e.id;
+				(new Image()).src = _e.pixel + "?pid=" + _e.p + "&" + _e.view + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + (_e.id ? ('&id=' + _e.id) : '');
 			}
 		}
 	}

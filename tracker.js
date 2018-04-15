@@ -3,6 +3,7 @@
 var Tracker = (function(){
 	
 	var _e = {
+		view: 'WEB_SEARCH_VIEW',
 		pixel: '//t.mogl.com/t/t.png',
 		setup : function( pI ){	
 			if( !pI ){
@@ -26,7 +27,6 @@ var Tracker = (function(){
 				var obs = new mo( function( m, observer ){
 					
 					var oi = [];
-					var ov;
 					for( var i = 0; i < m.length; i++ ){
 						for( var j = 0; j < m[i].addedNodes.length; j++ ){
 							var nodes = m[i].addedNodes[j]
@@ -43,13 +43,13 @@ var Tracker = (function(){
 										oi.push( oa );
 									}
 
-									ov = ov || node.getAttribute( 'vw' );
+									_e.view = node.getAttribute( 'vw' ) || _e.view;
 								}
 							}
 						}
 					}
 					
-					_e.track( oi, ov );
+					_e.track( oi );
 				});
 				
 				obs.observe( document.documentElement, {childList:true, subtree:true} );
@@ -59,7 +59,6 @@ var Tracker = (function(){
 		trackEl: function( el ){
 			// Go through and search for all the offers which may be present in the document.
 			var oi = [];
-			var ov;
 			for( var i = 0; i < el.length; i++ ) {
 				if( el[i] ){
 					if( el[i] instanceof HTMLElement ){
@@ -67,17 +66,16 @@ var Tracker = (function(){
 						if( oa != null ){
 							oi.push( oa );
 						}
-						ov = ov || el[i].getAttribute( 'vw' );
+						_e.view = el[i].getAttribute( 'vw' ) || _e.view;
 					}
 				}
 			}
-			_e.track( oi, ov );
+			_e.track( oi );
 		},
-		track : function( oi, ov ){
+		track : function( oi ){
 			if( oi.length ){
 				//console.log( JSON.stringify( oi ) );
-				ov = ov || 'WEB_SEARCH_VIEW';
-				(new Image()).src = _e.pixel + "?pid=" + _e.p + "&" + ov + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + "&" + _e.id;
+				(new Image()).src = _e.pixel + "?pid=" + _e.p + "&" + _e.view + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + "&" + _e.id;
 			}
 		}
 	}

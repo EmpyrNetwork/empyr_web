@@ -1,16 +1,9 @@
 'use strict';
 
-var Tracker = (function(wp){
-	var w = wp;
-	var e = w.empyr.q;
+var Tracker = (function(){
 	
 	var _e = {
 		pixel: '//t.mogl.com/t/t.png',
-		push : function(){
-			//console.log( arguments );
-			var a = Array.from( arguments );
-			_e[a[0]].apply( _e, a.slice(1) );
-		},
 		setup : function( pI ){	
 			if( !pI ){
 				throw "Partner id not defined in setup call";
@@ -84,23 +77,18 @@ var Tracker = (function(wp){
 			if( oi.length ){
 				//console.log( JSON.stringify( oi ) );
 				ov = ov || 'WEB_SEARCH_VIEW';
-				(new Image()).src = _e.pixel + "?v=0&d=w&pid=" + _e.p + "&" + ov + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + "&" + _e.id;
+				(new Image()).src = _e.pixel + "?pid=" + _e.p + "&" + ov + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + "&" + _e.id;
 			}
 		}
 	}
 	
 	Tracker = {
-		push: _e.push
+		setup: _e.setup,
+		track: _e.track
 	};
 	
-	w.empyr = _e.push;
-	
-	for( var i = 0; i < e.length; i++ ){
-		w.empyr.apply( w.empyr, e[i] );
-	}
-
 	return Tracker;
 	
-})(window);
+})();
 
 module.exports = Tracker;

@@ -83,7 +83,8 @@ var Tracker = (function(wp){
 		track : function( oi, ov ){
 			if( oi.length ){
 				//console.log( JSON.stringify( oi ) );
-				(new Image()).src = _e.pixel + "?v=0&d=w&vw=" + ov + "&pid=" + _e.p + "&oi=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + "&" + _e.id;
+				ov = ov || 'WEB_SEARCH_VIEW';
+				(new Image()).src = _e.pixel + "?v=0&d=w&pid=" + _e.p + "&" + ov + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + "&" + _e.id;
 			}
 		}
 	}

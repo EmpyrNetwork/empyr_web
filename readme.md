@@ -38,7 +38,7 @@ Parameter| Required | Description
 ---------| -------- | -----------
 pid | true | Partner id. This is the client key (NOT THE SECRET). Used to correlate the user data with the partner.
 vw (WEB_SEARCH_VIEW or WEB_DETAIL_VIEW) | true | This is a list of offer ids and the context they appear in. For example the value could be “WEB_DETAIL_VIEW=5554” or “WEB_SEARCH_VIEW=5554,5556,5558”, etc.
-id | false | The empyr id of the user performing the view. This would be the value returned as the id for the user from the signupWithCard/signup APIs. This is used to tie the user to the impression for conversion metrics. Alternatively, this can also be a partner’s usertoken that was supplied with the signupWithCard/signup APIs. This can be used instead of the empyr id param for convenience.
+m | false | The empyr id of the user performing the view. This would be the value returned as the id for the user from the signupWithCard/signup APIs. This is used to tie the user to the impression for conversion metrics. u | false | The partner’s usertoken that was supplied with the signupWithCard/signup APIs. This can be used instead of the empyr id param for convenience.
 
 ## Tracker.js
 Tracking.js is a javascript library that allows a partner to quickly and seamlessly add impression tracking to their site. Adding the following code to your sites template would be the easiest way to add tracking:

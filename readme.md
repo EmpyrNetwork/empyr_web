@@ -210,7 +210,7 @@ Below are the options that are available to the Mogl.setup() call:
 <html>
         <head>
                 <title>Test Hosted Fields</title>
-                <script src='https://test.mogl.com/mstatic/partner/mogl.js'></script>
+                <script src='scripts/hostedFields.js'></script>
                 <style>
                         .field-container {
                                 height: 50px;

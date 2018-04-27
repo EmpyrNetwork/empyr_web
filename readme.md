@@ -52,6 +52,8 @@ Tracking.js is a javascript library that allows a partner to quickly and seamles
 <!-- End Empyr -->
 ```
 
+The above code will asynchronously load the Empyr tracking javascript and initialize it.
+
 <br>
 Alternatively, you can use npm:
 <br>
@@ -67,7 +69,7 @@ Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
 ```
 <br>
 
-The above code will asynchronously load the Empyr tracking javascript and initialize it. Please note the following parameters:
+Please note the following parameters:
 
 1. CLIENT_ID -- This is your API key (NOT THE SECRET) which is used to identify the user as belonging to your application.
 

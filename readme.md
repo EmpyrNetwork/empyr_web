@@ -59,7 +59,8 @@ npm install empyr_web
 <br>
 then
 <br>
-``` javascript
+
+``` html
 Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
 ```
 <br>

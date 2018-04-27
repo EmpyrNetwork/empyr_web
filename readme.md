@@ -55,7 +55,9 @@ Tracking.js is a javascript library that allows a partner to quickly and seamles
 <br>
 Alternatively, you can use npm:
 <br>
-npm install empyr_web
+<br>
+<b>npm install empyr_web</b>
+<br>
 <br>
 then
 <br>

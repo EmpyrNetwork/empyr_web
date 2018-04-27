@@ -48,7 +48,7 @@ Tracking.js is a javascript library that allows a partner to quickly and seamles
 <script>
 	Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
 </script>
-<script async src='scripts/tracker.js'></script>
+<script async src='http://drlrrbp9w22xo.cloudfront.net/tracker.min.js'></script>
 <!-- End Empyr -->
 ```
 
@@ -210,7 +210,7 @@ Below are the options that are available to the Mogl.setup() call:
 <html>
         <head>
                 <title>Test Hosted Fields</title>
-                <script src='scripts/hostedFields.js'></script>
+                <script src='http://drlrrbp9w22xo.cloudfront.net/hostedFields.min.js'></script>
                 <style>
                         .field-container {
                                 height: 50px;

@@ -48,7 +48,7 @@ Tracking.js is a javascript library that allows a partner to quickly and seamles
 <script>
 	Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
 </script>
-<script async src='//d10ukqbetc2okm.cloudfront.net/mstatic/partner/tracker.js'></script>
+<script async src='scripts/tracker.js'></script>
 <!-- End Empyr -->
 ```
 

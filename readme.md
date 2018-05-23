@@ -48,23 +48,28 @@ Tracking.js is a javascript library that allows a partner to quickly and seamles
 <script>
 	Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
 </script>
-<script async src='//d10ukqbetc2okm.cloudfront.net/mstatic/partner/tracker.js'></script>
+<script async src='http://drlrrbp9w22xo.cloudfront.net/tracker.min.js'></script>
 <!-- End Empyr -->
 ```
+
+The above code will asynchronously load the Empyr tracking javascript and initialize it.
 
 <br>
 Alternatively, you can use npm:
 <br>
-npm install empyr_web
+<br>
+<b>npm install empyr_web</b>
+<br>
 <br>
 then
 <br>
-``` javascript
+
+``` html
 Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
 ```
 <br>
 
-The above code will asynchronously load the Empyr tracking javascript and initialize it. Please note the following parameters:
+Please note the following parameters:
 
 1. CLIENT_ID -- This is your API key (NOT THE SECRET) which is used to identify the user as belonging to your application.
 
@@ -209,7 +214,7 @@ Below are the options that are available to the Mogl.setup() call:
 <html>
         <head>
                 <title>Test Hosted Fields</title>
-                <script src='https://test.mogl.com/mstatic/partner/mogl.js'></script>
+                <script src='http://drlrrbp9w22xo.cloudfront.net/hostedFields.min.js'></script>
                 <style>
                         .field-container {
                                 height: 50px;

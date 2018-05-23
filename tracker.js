@@ -1,6 +1,6 @@
 'use strict';
 
-var Tracker = (function(){
+(function(){
 	
 	var _e = {
 		view: 'WEB_SEARCH_VIEW',
@@ -80,13 +80,20 @@ var Tracker = (function(){
 		}
 	}
 	
-	Tracker = {
+	var Tracker = {
 		setup: _e.setup,
 		track: _e.track
 	};
 	
-	return Tracker;
-	
-})();
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	    module.exports = Tracker;
+	} else {
+		if (typeof define === 'function' && define.amd) {
+		  define([], function() {
+		    return Tracker;
+		  });
+		}
+	}
 
-module.exports = Tracker;
+	window.Tracker = Tracker;
+})();

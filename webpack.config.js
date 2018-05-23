@@ -5,8 +5,8 @@ var optimization = {
 	minimizer: [
 	  new UglifyJSPlugin({
 	    uglifyOptions: {
-		  mangle: false
-		}})
+          mangle: false
+        }})
 	],
 }
 

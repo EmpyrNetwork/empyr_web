@@ -4,7 +4,7 @@
 	
 	var _e = {
 		view: 'WEB_SEARCH_VIEW',
-		pixel: '//t.mogl.com/t/t.png',
+		pixel: 'https://t.mogl.com/t/t.png',
 		setup : function( pI ){	
 			if( !pI ){
 				throw "Partner id not defined in setup call";

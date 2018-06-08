@@ -19,11 +19,11 @@ A high level description would be:
 2. Partner page triggers impression pixel which includes:
 
    a. Partner id
-   
+
    b. Empyr user id OR partner Empyr user token
-   
+
    c. List of offer ids displayed on the page
-   
+
 3. Pixel/impression is loaded from Empyr servers and recorded
 4. Empyr warehousing systems process the impression data for reporting to merchants
 
@@ -127,18 +127,18 @@ For partners who are not currently PCI compliant and would like to be subject to
 
 1. Create a parent page where users will register cards.
 2. In this page include the hosted fields javascript library.
-3. Create a form/container which is where the script will construct an iframe that houses the single credit card input field. 
-4. On page load execute the Mogl.setup() function call providing:
+3. Create a form/container which is where the script will construct an iframe that houses the single credit card input field.
+4. On page load execute the HostedFields.setup() function call providing:
 
    a. Your application key (not the secret)
-   
+
    b. The form HTML id.
-   
+
    c. The container identifier (which will hold the card iframe)
-   
+
    d. A userToken (explained further below)
 
-5. The script will create an iframe within the specified container (this container should have a fixed height set). 
+5. The script will create an iframe within the specified container (this container should have a fixed height set).
 6. The script will also takeover the form that submits details.
 
 
@@ -187,7 +187,7 @@ There are two primary ways in which you can customize the look and feel of the r
 </i>
 
 <br>
-Below are the options that are available to the Mogl.setup() call:
+Below are the options that are available to the HostedFields.setup() call:
 
 ``` javascript
 {
@@ -238,7 +238,7 @@ Below are the options that are available to the Mogl.setup() call:
                 </form>
 
                 <script>
-                        Mogl.setup( 'xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx', 'custom', { 
+                        HostedFields.setup( 'xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx', 'custom', {
                                 id: 'testForm',
                                 url: 'https://test.mogl.com',
                                 fields: {
@@ -255,5 +255,5 @@ Below are the options that are available to the Mogl.setup() call:
                         });
                 </script>
         </body>
-</html> 
+</html>
 ```

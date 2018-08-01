@@ -72,10 +72,10 @@
 			}
 			_e.track( oi );
 		},
-		track : function( oi ){
+		track : function( oi, view ){
 			if( oi.length ){
 				//console.log( JSON.stringify( oi ) );
-				(new Image()).src = _e.pixel + "?pid=" + _e.p + "&" + _e.view + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + (_e.id ? ("&" + _e.id) : '');
+				(new Image()).src = _e.pixel + "?pid=" + _e.p + "&" + (view ? view : _e.view) + "=" + ((oi instanceof Array) ? oi.join( "," ) : oi) + (_e.id ? ("&" + _e.id) : '');
 			}
 		}
 	}

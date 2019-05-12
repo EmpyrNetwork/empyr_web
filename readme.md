@@ -1,5 +1,6 @@
-[ ![Codeship Status for mzipagang/empyr_web](https://app.codeship.com/projects/c70ffbe0-0d70-0136-1ce4-3a8e8d4354bb/status?branch=master)](https://app.codeship.com/projects/282068)
-
+[![Build Status](https://travis-ci.org/EmpyrNetwork/empyr_web.svg?branch=master)](https://travis-ci.org/EmpyrNetwork/empyr_web)
+[![npm](https://img.shields.io/npm/v/empyr_web.svg)](https://www.npmjs.com/package/empyr_web)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Impression Tracking
 

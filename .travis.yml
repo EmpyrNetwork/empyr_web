@@ -9,20 +9,20 @@ install:
   - npm run build
 
 deploy:
-  provider: npm
-  email: "$NPM_EMAIL"
-  api_key: "$NPM_TOKEN"
-  skip_cleanup: true
-  on:
-    tags: true
+  - provider: npm
+    email: "$NPM_EMAIL"
+    api_key: "$NPM_TOKEN"
+    skip_cleanup: true
+    on:
+      tags: true
 
-  provider: s3
-  access_key_id: "$AWS_ACCESS_KEY"
-  secret_access_key: "$AWS_SECRET_KEY"
-  bucket: "empyr-web-js"
-  skip_cleanup: true
-  local_dir: dist
-  region: us-west-1
+  - provider: s3
+    access_key_id: "$AWS_ACCESS_KEY"
+    secret_access_key: "$AWS_SECRET_KEY"
+    bucket: "empyr-web-js"
+    skip_cleanup: true
+    local_dir: dist
+    region: us-west-1
 
 after_deploy:
   - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY -s $AWS_SECRET_KEY -c $AWS_CLOUDFRONT_DIST_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST

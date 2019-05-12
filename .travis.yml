@@ -6,6 +6,7 @@ node_js:
 install:
   - npm install -g travis-ci-cloudfront-invalidation
   - npm install
+  - npm run build
 
 deploy:
   provider: npm

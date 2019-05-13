@@ -3,7 +3,8 @@
 var EmpyrQueue = (function(wp){
 	
 	var w = wp;
-	var e = w.empyr.q;
+
+	var e = ( w.empyr ) ? w.empyr.q : [];
 
 	var _e = {
 		view: 'WEB_SEARCH_VIEW',

@@ -1,10 +1,19 @@
 'use strict';
 
-(function(){
+var EmpyrQueue = (function(wp){
 	
+	var w = wp;
+	var e = w.empyr.q;
+
 	var _e = {
 		view: 'WEB_SEARCH_VIEW',
-		pixel: 'https://t.mogl.com/t/t.png',
+		pixel: '//t.mogl.com/t/t.png',
+
+		push: function() {
+			var a = Array.from( arguments );
+			_e[a[0]].apply( _e, a.slice(1) );
+		},
+
 		setup : function( pI ){	
 			if( !pI ){
 				throw "Partner id not defined in setup call";
@@ -85,15 +94,27 @@
 		track: _e.track
 	};
 	
-    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-	    module.exports = Tracker;
+	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+		module.exports = Tracker;
 	} else {
 		if (typeof define === 'function' && define.amd) {
-		  define([], function() {
-		    return Tracker;
-		  });
+			define([], function() {
+				return Tracker;
+			});
 		}
 	}
 
-	window.Tracker = Tracker;
-})();
+	w.Tracker = Tracker;
+
+	EmpyrQueue = {
+		push: _e.push
+	};
+
+	w.empyr = _e.push;
+
+	for( var i = 0; i < e.length; i++ ) {
+		w.empyr.apply( w.empyr, e[i] );
+	}
+
+	return EmpyrQueue;
+})(window);

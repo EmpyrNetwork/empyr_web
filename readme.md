@@ -47,27 +47,20 @@ Tracking.js is a javascript library that allows a partner to quickly and seamles
 ```html
 <!-- Start Empyr -->
 <script>
-	Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
+	window.empyr=window.empyr||function(){(empyr.q=empyr.q||[]).push(arguments)};empyr.l=+new Date;
+	empyr( 'setup', 'CLIENT_ID', {m: EMPYR_UID, watch: true});
 </script>
-<script async src='http://drlrrbp9w22xo.cloudfront.net/tracker.min.js'></script>
+<script async src='//drlrrbp9w22xo.cloudfront.net/tracker.min.js'></script>
 <!-- End Empyr -->
 ```
 
 The above code will asynchronously load the Empyr tracking javascript and initialize it.
 
 <br>
-Alternatively, you can use npm:
+Alternatively, you can use npm to use a locally hosted version:
 <br>
 <br>
 <b>npm install empyr_web</b>
-<br>
-<br>
-then
-<br>
-
-``` html
-Tracker.setup('CLIENT_ID', {m: EMPYR_UID, watch: true});
-```
 <br>
 
 Please note the following parameters:
@@ -110,8 +103,8 @@ If you don’t wish to use the attribute approach outlined earlier then it is al
 
 ``` javascript
 // Explicitly call the track function with the id of the offer, and the view context the offer appears in
-Tracker.track(“5554”, “WEB_DETAIL_VIEW” )
-Tracker.track([“5554”,“5556”,”5558”], “WEB_SEARCH_VIEW” )
+empyr('track', “5554”, “WEB_DETAIL_VIEW” )
+empyr('track', [“5554”,“5556”,”5558”], “WEB_SEARCH_VIEW” )
 ```
 
 The advantage of the second call over the first is that there will be a single pixel fire to track impressions for 5554, 5556 and 5558, instead of three pixel fires.

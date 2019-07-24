@@ -1,6 +1,6 @@
 {
   "name": "empyr_web",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Includes Empyr tracking and Hosted Fields scripts",
   "directories": {
     "test": "test"

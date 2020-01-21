@@ -1,10 +1,10 @@
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 var optimization = {
 	minimizer: [
-	  new UglifyJSPlugin({
-	    uglifyOptions: {
+	  new TerserPlugin({
+	    terserOptions: {
           mangle: false
         }})
 	],

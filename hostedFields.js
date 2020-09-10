@@ -14,6 +14,10 @@
 				cardNumber: {
 					selector: undefined,			// The selector to use for the cardNumber container.
 					placeHolder:  undefined			// The placeholder text to use.
+				},
+				expirationDate: {
+					selector: undefined,			// The selector to use for the cardNumber container.
+					placeHolder:  undefined			// The placeholder text to use.
 				}
 			}
 	};
@@ -37,10 +41,12 @@
 	    // to submit.
 	    form = new FormNapper( opts.id );
 	    form.hijack( _formSubmitted );
-	    
-	    framebus.on( "FRAME_READY", function( reply ) {
-	    	reply();
-	    });
+
+	    var fieldCount = 0;
+	    framebus.on("FRAME_READY", function (reply) {
+	        fieldCount--;
+	        reply(fieldCount === 0);
+	      });
 	    
 	    framebus.on( "CONFIGURATION_REQUEST", function( reply ) {
 	    	reply( options.fields );
@@ -48,10 +54,22 @@
 	    
 	    var container = document.querySelector( options.fields.cardNumber.selector );
 	    
-	    // Insert our iframe.
+	    // Insert iframe for card number
 	    var iframe = _createIframe( options.url + '/partner/hosted' );
 	    iframe.name = 'cardNumber';
 	    container.appendChild( iframe );
+	    fieldCount++;
+
+	    if (typeof options.fields.expirationDate !== 'undefined' && typeof options.fields.expirationDate.selector !== 'undefined')
+	    {
+		    container = document.querySelector( options.fields.expirationDate.selector );
+		    
+		    // Insert iframe for expiration date
+		    iframe = _createIframe( options.url + '/partner/hosted' );
+		    iframe.name = 'expirationDate';
+		    container.appendChild( iframe );
+		    fieldCount++;
+	    }
 	}
 	
 	function _createIframe( url )

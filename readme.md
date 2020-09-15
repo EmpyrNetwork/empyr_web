@@ -128,11 +128,11 @@ For partners who are not currently PCI compliant and would like to be subject to
 
    b. The form HTML id.
 
-   c. The container identifier (which will hold the card iframe)
+   c. The identifiers for the cardNumber and expirationDats (which will hold the iframes)
 
    d. A userToken (explained further below)
 
-5. The script will create an iframe within the specified container (this container should have a fixed height set).
+5. The script will create iframes within the specified container (this container should have a fixed height set).
 6. The script will also takeover the form that submits details.
 
 
@@ -196,6 +196,10 @@ Below are the options that are available to the HostedFields.setup() call:
                 cardNumber: {
                         selector: undefined,                // The selector to use for the cardNumber container.
                         placeHolder:  undefined        // The placeholder text to use.
+                },
+                expirationDate: {
+                        selector: undefined,                // The selector to use for the expiration container.
+                        placeHolder:  undefined        // The placeholder text to use.
                 }
         }
 };
@@ -228,7 +232,9 @@ Below are the options that are available to the HostedFields.setup() call:
                 <form id='testForm'>
                         <label for='card-number'>Card Number</label>
                         <div id='card-number' class='field-container'></div>
-                        <input type='submit'/>
+                        <label for='expiration-date'>Expiration Date</label>
+                        <div id='expiration-date' class='field-container'></div>
+			<input type='submit'/>
                 </form>
 
                 <script>
@@ -243,8 +249,13 @@ Below are the options that are available to the HostedFields.setup() call:
                                     }
                                   },
                                   cardNumber: {
-                                    selector: '#card-number'
-                                  }
+                                    selector: '#card-number',
+                                    placeHolder: '4111111111111111'
+                                  },
+                                  expirationDate: {
+                                    selector: '#expiration-date',
+                                    placeHolder: 'MM/YYYY'
+                                   }
                                 }
                         });
                 </script>

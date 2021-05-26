@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/EmpyrNetwork/empyr_web.svg?branch=master)](https://travis-ci.org/EmpyrNetwork/empyr_web)
+[![Build Status](https://travis-ci.com/EmpyrNetwork/empyr_web.svg?branch=master)](https://travis-ci.com/EmpyrNetwork/empyr_web)
 [![npm](https://img.shields.io/npm/v/empyr_web.svg)](https://www.npmjs.com/package/empyr_web)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

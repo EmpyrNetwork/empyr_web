@@ -3,6 +3,7 @@
 (function(){
 	var options = {
 			id: undefined,					// The id of the form.
+			onFieldChange: undefined,		// The method to call when field values change
 			onRegistered: undefined,		// The method to call when we have successfully registered.
 			onError: undefined,				// The method to call in the event of an error,
 			url: 'https://www.HostedFields.com',	// The url that will be used to construct the hosted fields.
@@ -58,6 +59,7 @@
 	    var iframe = _createIframe( options.url + '/partner/hosted' );
 	    iframe.name = 'cardNumber';
 	    container.appendChild( iframe );
+	    options.fields.cardNumber.container = container;
 	    fieldCount++;
 
 	    if (typeof options.fields.expirationDate !== 'undefined' && typeof options.fields.expirationDate.selector !== 'undefined')
@@ -68,8 +70,18 @@
 		    iframe = _createIframe( options.url + '/partner/hosted' );
 		    iframe.name = 'expirationDate';
 		    container.appendChild( iframe );
+		    options.fields.expirationDate.container = container;
 		    fieldCount++;
 	    }
+	    
+	    if (options.onFieldChange !== undefined)
+	    {
+		    framebus.on( "INPUT", function( event ) {
+		    	if (event.field == 'cardNumber') event.field = options.fields.cardNumber.container.id;
+		    	if (event.field == 'expirationDate') event.field = options.fields.expirationDate.container.id;
+		    	options.onFieldChange(event);
+		    });
+		}
 	}
 	
 	function _createIframe( url )

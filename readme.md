@@ -128,7 +128,7 @@ For partners who are not currently PCI compliant and would like to be subject to
 
    b. The form HTML id.
 
-   c. The identifiers for the cardNumber and expirationDats (which will hold the iframes)
+   c. The identifiers for the cardNumber and expirationDate (which will hold the iframes)
 
    d. A userToken (explained further below)
 
@@ -180,12 +180,14 @@ There are two primary ways in which you can customize the look and feel of the r
 "-moz-osx-font-smoothing", "-moz-transition", "-webkit-font-smoothing", "-webkit-transition", "color", "font", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-variant-alternates", "font-variant-caps", "font-variant-east-asian", "font-variant-ligatures", "font-variant-numeric", "font-weight", "line-height", "opacity", "outline", "text-shadow", "transition"
 </i>
 
-<br>
 Below are the options that are available to the HostedFields.setup() call:
+
+<br>
 
 ``` javascript
 {
         id: undefined,                // The id of the form.
+	onFieldChange: undefined,       // The method to call when field values change
         onRegistered: undefined,        // The method to call when we have successfully registered.
         onError: undefined,                // The method to call in the event of an error,
         url: 'https://www.mogl.com',        // The url that will be used to construct the hosted fields.
@@ -205,8 +207,9 @@ Below are the options that are available to the HostedFields.setup() call:
 };
 ```
 
-
 ## Example
+
+https://codepen.io/gofigg/pen/ExWmEyb
 
 ``` html
 <html>
@@ -220,27 +223,41 @@ Below are the options that are available to the HostedFields.setup() call:
                                 padding: 0 0.5em;
                                 border: 1px solid #ddd;
                         }
-                        .field-container.mogl-invalid {
-                                border-color: tomato;
-                        }
-                        .field-container.mogl-valid {
-                                border-color: limegreen;
-                        }
+			.field-label.invalid {
+				color: tomato;
+			}
                 </style>
         </head>
         <body>
                 <form id='testForm'>
-                        <label for='card-number'>Card Number</label>
+                        <label class='field-label' for='card-number'>Card Number</label>
                         <div id='card-number' class='field-container'></div>
-                        <label for='expiration-date'>Expiration Date</label>
+                        <label class='field-label' for='expiration-date'>Expiration Date</label>
                         <div id='expiration-date' class='field-container'></div>
 			<input type='submit'/>
                 </form>
 
                 <script>
+			function findLabel(field) {
+			  return $('.field-label[for="' + field + '"]');
+			}
+
+			function onFieldChange(event) {
+			  var label = findLabel(event.field);
+			  if (event.isValid) {
+			    label.removeClass("invalid");
+			  } else {
+			    label.addClass("invalid");
+			  }
+			}
+			
                         HostedFields.setup( 'xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx', 'custom', {
                                 id: 'testForm',
                                 url: 'https://test.mogl.com',
+				onRegistered: function (resp) {
+				   alert("card was registered");
+				},
+				onFieldChange: onFieldChange,
                                 fields: {
                                   userDetails: 'aaabbbccc@mogl.com:1438012870:V8r21YLFFPqjYkkdqtOPLAWg/Sq+u/bD+dZOM/aesRwv2uIn7rVOx/Jfiu3HGApMsAaqKXhmMtDfNU2Vyhj',
                                   styles: {
